@@ -43,5 +43,5 @@ dependencies = [
     "pyrootutils",
     "matplotlib",
     "seaborn",
-    "museval",
+    "museval"
 ]
