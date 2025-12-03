@@ -25,6 +25,3 @@ dependencies = [
     "tqdm",
     "librosa==0.9.1"
 ]
-
-[tool.setuptools.packages.find]
-where = ["src"]
