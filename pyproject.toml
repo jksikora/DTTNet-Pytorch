@@ -35,7 +35,7 @@ dependencies = [
     'isort",
     "flake8",
     "python-dotenv",
-    'rich",
+    "rich",
     "pytest",
     "sh",
     "scikit-learn",
