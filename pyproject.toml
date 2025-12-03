@@ -23,5 +23,6 @@ dependencies = [
     "hydra-core",
     "pytorch-lightning>=2.0,<2.10",
     "tqdm",
+    "onnxruntime-gpu",
     "librosa==0.9.1"
 ]
