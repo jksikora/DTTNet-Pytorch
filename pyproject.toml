@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dttnet"
+version = "0.1.0"
+description = "DTTNet music source separation model"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "junyuchen-cjy", email = "example@example.com" }
+]
+license = { text = "Apache-2.0" }
+
+dependencies = [
+    "torch==2.9.0",
+    "torchaudio==2.9.0",
+    "numpy",
+    "einops==0.6.1",
+    "soundfile==0.12.1",
+    "omegaconf",
+    "hydra-core",
+    "pytorch-lightning>=2.0,<2.10",
+    "tqdm",
+    "librosa==0.9.1"
+]
