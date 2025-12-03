@@ -32,7 +32,7 @@ dependencies = [
     "tensorboard",
     "pre-commit",
     "black",
-    'isort",
+    "isort",
     "flake8",
     "python-dotenv",
     "rich",
