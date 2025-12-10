@@ -22,7 +22,9 @@ def separate_with_onnx(batch_size, model, onnx_path: Path, mix):
         waves = np.array(mix_p[:, i:i + model.sampling_size], dtype=np.float32)
         mix_waves.append(waves)
         i += gen_size
-    mix_waves_batched = torch.tensor(mix_waves, dtype=torch.float32).split(batch_size)
+    mix_waves_array = np.array(mix_waves_batched, dtype=np.float32)
+    mix_waves_tensor = torch.from_numpy(mix_waves_array)
+    mix_waves_batched = mix_waves_tensor.split(batch_size)
 
     tar_signals = []
 
@@ -54,7 +56,9 @@ def separate_with_ckpt(batch_size, model, ckpt_path: Path, mix, device, double_c
     num_chunks = mixture.shape[-1] // true_samples
     mix_waves_batched = [mixture[:, i * true_samples: i * true_samples + inf_ck] for i in
                          range(num_chunks)]
-    mix_waves_batched = torch.tensor(mix_waves_batched, dtype=torch.float32).split(batch_size)
+    mix_waves_array = np.array(mix_waves_batched, dtype=np.float32)
+    mix_waves_tensor = torch.from_numpy(mix_waves_array)
+    mix_waves_batched = mix_waves_tensor.split(batch_size)
 
     target_wav_hats = []
 
@@ -88,7 +92,9 @@ def separate_with_onnx_TDF(batch_size, model, onnx_path: Path, mix):
         waves = np.array(mix_p[:, i:i + model.inference_chunk_size], dtype=np.float32)
         mix_waves.append(waves)
         i += gen_size
-    mix_waves_batched = torch.tensor(mix_waves, dtype=torch.float32).split(batch_size)
+    mix_waves_array = np.array(mix_waves_batched, dtype=np.float32)
+    mix_waves_tensor = torch.from_numpy(mix_waves_array)
+    mix_waves_batched = mix_waves_tensor.split(batch_size)
 
     tar_signals = []
 
@@ -146,7 +152,9 @@ def no_overlap_inference(model, mix, device, batch_size, inf_ck):
     num_chunks = mixture.shape[-1] // true_samples
     mix_waves_batched = [mixture[:, i * true_samples: i * true_samples + inf_ck] for i in
                          range(num_chunks)]
-    mix_waves_batched = torch.tensor(mix_waves_batched, dtype=torch.float32).split(batch_size)
+    mix_waves_array = np.array(mix_waves_batched, dtype=np.float32)
+    mix_waves_tensor = torch.from_numpy(mix_waves_array)
+    mix_waves_batched = mix_waves_tensor.split(batch_size)
 
     target_wav_hats = []
 
@@ -174,7 +182,9 @@ def overlap_inference(model, mix, device, batch_size, inf_ck, overlap_rate, tmp_
     step_t = mix.shape[1]
     mix_waves_batched = split_nparray_with_overlap(mix.T, hop_length, overlap_size)
 
-    mix_waves_batched = torch.tensor(mix_waves_batched, dtype=torch.float32).split(batch_size) # [(b, c, t)]
+    mix_waves_array = np.array(mix_waves_batched, dtype=np.float32)
+    mix_waves_tensor = torch.from_numpy(mix_waves_array)
+    mix_waves_batched = mix_waves_tensor.split(batch_size)
 
     target_wav_hats = []
 
